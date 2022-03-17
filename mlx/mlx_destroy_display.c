@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 18:44:55 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/07 22:21:18 by mvue             ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "mlx_int.h"
 
-void    mandelbrot(void)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-    complex c;
-    complex z;
-    point   p;
-
-
-}
-
-int    main(void)
-{
-	void	*mlx;
-	void	*img;
-
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
-	mlx_loop(mlx);
+	XCloseDisplay(xvar->display);
 }
