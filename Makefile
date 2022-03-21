@@ -2,7 +2,7 @@ NAME=fractol
 CC=gcc
 RM=rm -f
 
-SRC = mandelbrot.c
+SRC = mandelbrot.c zoom.c
 
 OBJ = $(SRC:.c=.o)
 
