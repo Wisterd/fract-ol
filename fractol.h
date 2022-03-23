@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/21 12:21:04 by mvue             ###   ########.fr       */
+/*   Updated: 2022/03/22 12:10:14 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_data {
 	int		endian;
 }			t_data;
 
-typedef struct s_complex_number
+typedef struct s_complex_num
 {
 	float		real;
 	float		ima;
@@ -42,11 +42,22 @@ typedef struct s_screen_point
 	float	y;
 }			t_point;
 
+typedef struct	s_mlx_parameters
+{
+	void	*mlx;
+	void	*mlx_win;
+}			t_mlx_params;
+
 typedef struct s_zoom_parameters
 {
-	int		maxiter;
-	t_point p;
-	void 	*mlx;
+	int			maxiter;
+	void		*mlx;
+	void		*mlx_win;
+	t_point		screen;
 }			t_zoom_params;
 
+void			scroll_hook(t_zoom_params param);
+int				zoom(int button, int x, int y, t_zoom_params *param);
+t_zoom_params	init_zoom(int maxiter, void *mlx, void *mlx_win, t_point screen);
+void   			mandelbrot(int maxiter, t_point screen, t_data img, float epsi);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:44:55 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/21 11:37:53 by mvue             ###   ########.fr       */
+/*   Updated: 2022/03/22 15:39:21 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	pixel_put(t_data *data, int x, int y, int color)
 
 t_complex	mandel_init(float epsi, t_point p, t_point screen)
 {
-	float		real_start;
-	float		real_end;
-	float		ima_start;
-	float		ima_end;
-	t_complex	c;
+	float				real_start;
+	float				real_end;
+	float				ima_start;
+	float				ima_end;
+	t_complex			c;
 
 	real_start = -2;
 	real_end = 1;
@@ -121,13 +121,13 @@ void    mandelbrot(int maxiter, t_point screen, t_data img, float epsi)
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-	t_point	screen;
-	int		i;
-	int		j;
-	int		maxiter;
+	void			*mlx;
+	void			*mlx_win;
+	t_data			img;
+	t_point			screen;
+	int				i;
+	int				j;
+	int				maxiter;
 
 	i = 0;
 	j = 0;
@@ -141,5 +141,6 @@ int	main(void)
 			&img.line_length, &img.endian);
 	mandelbrot(maxiter, screen, img, 1);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	scroll_hook(init_zoom(maxiter, mlx, mlx_win, screen));
 	mlx_loop(mlx);
 }
