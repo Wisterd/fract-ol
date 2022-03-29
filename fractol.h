@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/22 12:10:14 by mvue             ###   ########.fr       */
+/*   Updated: 2022/03/27 21:39:39 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define SCROLLUP_KEY 4
 # define SCROLLDOWN_KEY 5
+# define ESCP 53
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -32,32 +33,38 @@ typedef struct s_data {
 
 typedef struct s_complex_num
 {
-	float		real;
-	float		ima;
+	double		real;
+	double		ima;
 }			t_complex;
 
 typedef struct s_screen_point
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }			t_point;
 
 typedef struct	s_mlx_parameters
 {
 	void	*mlx;
 	void	*mlx_win;
+	t_data	img;
 }			t_mlx_params;
 
 typedef struct s_zoom_parameters
 {
-	int			maxiter;
-	void		*mlx;
-	void		*mlx_win;
-	t_point		screen;
+	int				maxiter;
+	t_mlx_params	mlx;
+	t_point			screen;
+	double			*zoom_rate;
+	t_point			mouse;
 }			t_zoom_params;
 
 void			scroll_hook(t_zoom_params param);
-int				zoom(int button, int x, int y, t_zoom_params *param);
-t_zoom_params	init_zoom(int maxiter, void *mlx, void *mlx_win, t_point screen);
-void   			mandelbrot(int maxiter, t_point screen, t_data img, float epsi);
+int				zoom_hook(int button, int x, int y, t_zoom_params *param);
+t_zoom_params	init_zoom(int maxiter, t_mlx_params mlx, t_point screen, double *zoom_rate);
+void			mandelbrot(int maxiter, t_point screen, t_data img, t_zoom_params zoom);
+int				win_close(int keycode, t_mlx_params *params);
+int				putkey(int keycode, t_mlx_params *params);
+int				color_scale(int	cnt, int maxiter);
+
 #endif
