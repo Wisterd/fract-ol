@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/27 21:39:39 by mvue             ###   ########.fr       */
+/*   Updated: 2022/03/30 00:22:02 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <pthread.h>
-# include <mlx.h>
+# include "../mlx/mlx.h"
 
 typedef struct s_data {
 	void	*img;
@@ -59,9 +59,9 @@ typedef struct s_zoom_parameters
 	t_point			mouse;
 }			t_zoom_params;
 
-void			scroll_hook(t_zoom_params param);
+void			scroll_hook(t_zoom_params *param);
 int				zoom_hook(int button, int x, int y, t_zoom_params *param);
-t_zoom_params	init_zoom(int maxiter, t_mlx_params mlx, t_point screen, double *zoom_rate);
+t_zoom_params	*init_zoom(int maxiter, t_mlx_params mlx, t_point screen, double *zoom_rate);
 void			mandelbrot(int maxiter, t_point screen, t_data img, t_zoom_params zoom);
 int				win_close(int keycode, t_mlx_params *params);
 int				putkey(int keycode, t_mlx_params *params);

@@ -6,27 +6,31 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 22:11:07 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/28 00:44:54 by mvue             ###   ########.fr       */
+/*   Updated: 2022/03/30 00:29:36 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_zoom_params	init_zoom(int maxiter, t_mlx_params mlx, t_point screen, double *zoom_rate)
+t_zoom_params	*init_zoom(int maxiter, t_mlx_params mlx, t_point screen, double *zoom_rate)
 {
-	t_zoom_params	zoom_params;
+	t_zoom_params	*zoom_params;
 
-	zoom_params.maxiter = maxiter;
-	zoom_params.mlx = mlx;
-	zoom_params.screen = screen;
-	zoom_params.zoom_rate = zoom_rate;
+
+	zoom_params = malloc(sizeof(*zoom_params));
+	zoom_params->maxiter = maxiter;
+	zoom_params->mlx = mlx;
+	zoom_params->screen = screen;
+	zoom_params->zoom_rate = zoom_rate;
+	printf("%f, %f\n", zoom_params->screen.x, zoom_params->screen.y);
 	return(zoom_params);
 }
 
 static int		zoom_in(t_zoom_params *param)
 {
 	*(param->zoom_rate) *= 1/1.1;
-	param->mlx.img.img = mlx_new_image(param->mlx.mlx, param->screen.x, param->screen.y);
+	printf("zoom in %d, %d\n", (int)param->screen.x, (int)param->screen.y);
+	param->mlx.img.img = mlx_new_image(param->mlx.mlx,  (int)param->screen.x ,(int)param->screen.y);
 	param->mlx.img.addr = mlx_get_data_addr(param->mlx.img.img, &(param->mlx.img.bits_per_pixel),
 		&(param->mlx.img.line_length), &(param->mlx.img.endian));
 	mandelbrot(param->maxiter, param->screen, param->mlx.img, *param);
@@ -37,6 +41,8 @@ static int		zoom_in(t_zoom_params *param)
 static int		zoom_out(t_zoom_params *param)
 {
 	*(param->zoom_rate) *= 1.1;
+		printf("zoom out %d, %d\n", (int)param->screen.x, (int)param->screen.y);
+
 	param->mlx.img.img = mlx_new_image(param->mlx.mlx, param->screen.x, param->screen.y);
 	param->mlx.img.addr = mlx_get_data_addr(param->mlx.img.img, &(param->mlx.img.bits_per_pixel),
 		&(param->mlx.img.line_length), &(param->mlx.img.endian));
@@ -50,6 +56,8 @@ int		zoom_hook(int button, int x, int y, t_zoom_params *param)
 	t_point	mouse;
 
 	mouse.x = x;
+	printf("%p", (void*)param);
+	printf("%f, %f\n", param->screen.x, param->screen.y);
 	printf("x : %d\n", x);
 	printf("rescale x : %f\n", (float)x / 959 * 3);
 	mouse.y = y;
@@ -63,7 +71,8 @@ int		zoom_hook(int button, int x, int y, t_zoom_params *param)
 	return (0);
 }
 
-void	scroll_hook(t_zoom_params param)
+void	scroll_hook(t_zoom_params *param)
 {
-	mlx_mouse_hook(param.mlx.mlx_win, zoom_hook, &param);
+	printf("error %f, %f\n", param->screen.x, param->screen.y);
+	mlx_mouse_hook(param->mlx.mlx_win, zoom_hook, param);
 }
