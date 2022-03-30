@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:44:55 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/30 00:30:33 by mvue             ###   ########.fr       */
+/*   Updated: 2022/03/30 18:17:54 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static t_complex	mandel_init(t_zoom_params zoom, t_point p, t_point screen)
 	c.ima = ima_start + p.y / screen.y * (ima_end - ima_start);
 	c.real *= *(zoom.zoom_rate);
 	c.ima  *= *(zoom.zoom_rate);
-	c.real += zoom.mouse.x / ((screen.x - 1) / (real_end - real_start)) + real_start;
-	c.ima += zoom.mouse.y / ((screen.y - 1) / (ima_end - ima_start)) + ima_start;
+	//c.real += zoom.mouse.x / ((screen.x - 1) / (real_end - real_start)) + real_start;
+	//c.ima += zoom.mouse.y / ((screen.y - 1) / (ima_end - ima_start)) + ima_start;
 	return (c);
 }
 
