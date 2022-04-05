@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/30 18:37:32 by mvue             ###   ########.fr       */
+/*   Updated: 2022/03/30 22:19:11 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <pthread.h>
-# include <mlx.h>
+# include "../mlx/mlx.h"
 
 typedef struct s_data {
 	void	*img;
@@ -53,24 +53,18 @@ typedef struct	s_mlx_parameters
 typedef struct s_zoom_parameters
 {
 	int				maxiter;
-	t_mlx_params	mlx;
+	t_mlx_params	*mlx;
 	t_point			screen;
 	double			*zoom_rate;
 	t_point			mouse;
 }			t_zoom_params;
 
-typedef struct s_close_params
-{
-	t_mlx_params	*mlx;
-	t_zoom_params	*zoom_params;
-}			t_close_params;
-
 void			scroll_hook(t_zoom_params *param);
 int				zoom_hook(int button, int x, int y, t_zoom_params *param);
-void			key_hooks(t_close_params *close_params);
-t_zoom_params	*init_zoom(int maxiter, t_mlx_params mlx, t_point screen, double *zoom_rate);
+void			key_hooks(t_zoom_params *close_params);
+t_zoom_params	*init_zoom(int maxiter, t_mlx_params *mlx, t_point screen, double *zoom_rate);
 void			mandelbrot(int maxiter, t_point screen, t_data img, t_zoom_params zoom);
-int				win_close(t_close_params *params);
+int				win_close(t_zoom_params *params);
 int				putkey(int keycode, t_mlx_params *params);
 int				color_scale(int	cnt, int maxiter);
 
