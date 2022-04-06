@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 00:13:29 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/30 21:46:14 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/06 18:07:23 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,22 @@ int	main(void)
 {
 	t_mlx_params	mlx;
 	t_point			screen;
-	int				maxiter;
 	double			zoom_rate;
 	t_zoom_params	*zoom_params;
 
 	screen.x = 960;
 	screen.y = 540;
-	maxiter = 150;
 	zoom_rate = 1;
 	mlx.mlx = mlx_init();
 	mlx.mlx_win = mlx_new_window(mlx.mlx, screen.x, screen.y, "Fractol");
 	mlx.img.img = mlx_new_image(mlx.mlx, screen.x, screen.y);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &(mlx.img.bits_per_pixel),
 			&mlx.img.line_length, &mlx.img.endian);
-	mandelbrot(maxiter, screen, mlx.img, main_init(&zoom_rate));
+	mandelbrot(200, screen, &mlx.img, main_init(&zoom_rate));
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img.img, 0, 0);
-	zoom_params = init_zoom(maxiter, &mlx, screen, &zoom_rate);
-	scroll_hook(zoom_params);
-	key_hooks(zoom_params);
-	//mlx_key_hook(mlx.mlx_win, putkey, &mlx);
+	zoom_params = init_zoom(200, &mlx, screen, &zoom_rate);
+	mlx_key_hook(zoom_params->mlx->mlx_win, key_hooks, zoom_params);
+	mlx_hook(zoom_params->mlx->mlx_win, 17, 1L << 3, win_close, zoom_params);
+	mlx_mouse_hook(zoom_params->mlx->mlx_win, zoom_hook, zoom_params);
 	mlx_loop(mlx.mlx);
 }

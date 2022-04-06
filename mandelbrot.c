@@ -6,13 +6,13 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:44:55 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/30 18:17:54 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/06 14:48:10 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	pixel_put(t_data *data, int x, int y, int color)
+void	pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -41,7 +41,7 @@ static t_complex	mandel_init(t_zoom_params zoom, t_point p, t_point screen)
 	return (c);
 }
 
-void    mandelbrot(int maxiter, t_point screen, t_data img, t_zoom_params zoom)
+void    mandelbrot(int maxiter, t_point screen, t_data *img, t_zoom_params zoom)
 {
     t_complex 	c;
     t_complex 	z;
@@ -66,7 +66,7 @@ void    mandelbrot(int maxiter, t_point screen, t_data img, t_zoom_params zoom)
 				z.real = temp;
 				cnt++;
 			}
-			pixel_put(&img, p.x, p.y, color_scale(cnt, maxiter));
+			pixel_put(img, p.x, p.y, color_scale(cnt, maxiter));
 			p.x++;
 		}
 		p.y++;

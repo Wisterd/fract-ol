@@ -6,13 +6,13 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:14:35 by mvue              #+#    #+#             */
-/*   Updated: 2022/03/27 21:37:21 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/06 18:07:48 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	create_color(int r, int g, int b)
+int	create_color(int r, int g, int b)
 {
 	return (0 << 24 | r << 16 | g << 8 | b);
 }
@@ -48,11 +48,13 @@ int	color_scale(int	cnt, int maxiter)
 /*
 int	color_scale(int cnt, int maxiter)
 {
-	t_rgb	color;
+	int	r;
+	int	g;
+	int	b;
 
-	color.r = 255 - cnt * 255 / maxiter;
-	color.g = 255 - cnt * 255 / maxiter;
-	color.b = 255 - cnt * 255 / maxiter;
-	return (0 << 24 | color.r << 16 | color.g << 8 | color.b);
+	r = 255 - cnt * 255 / maxiter;
+	g = 255 - cnt * 255 / maxiter;
+	b = 255 - cnt * 255 / maxiter;
+	return (0 << 24 | r << 16 | g << 8 | b);
 }
 */

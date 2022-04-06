@@ -1,22 +1,15 @@
 NAME=fractol
 CC=gcc
+FLAGS = -Wall -Wextra -Werror
 RM=rm -f
 
 SRC = mandelbrot.c zoom.c utils.c hook.c main.c color.c
 
-OBJ = $(SRC:.c=.o)
-
-MLXLINK	:=	-L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
-MLXINC	:=	-I /usr/local/include
-
-LIB_LINK	+=	-lm $(MLXLINK)
-LIB_INC		+=	$(MLXINC)
-
-%.o: %.c
-	$(CC) -Wall -Wextra -Werror $(MLXINC) -c $< -o $@
+OBJ = $(SRC:.c=.o) 
+LIB_LINK = ../mlx/libmlx_Linux.a -lXext -lX11 -lm
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLXLINK) -o $(NAME)
+	$(CC) $(OBJ) $(LIB_LINK) -o $(NAME)
 
 all: $(NAME)
 
