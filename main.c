@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 00:13:29 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 21:19:57 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/11 22:20:56 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	launch_set(int	id_set, t_data *img_ptr, t_zoom_params zoom, char **av)
 {
 	t_complex	c;
 	
-	if(id_set == 1)
+	if (id_set == 1)
 		mandelbrot(200, img_ptr, zoom);
-	if(id_set == 2)
+	if (id_set == 2)
 	{
 		if (check_complex(av[2], av[3]))
 		{

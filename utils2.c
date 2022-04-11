@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 20:09:30 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 21:24:24 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/11 22:19:02 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ int	is_numb(char *str)
 {
 	int	i;
 	int	cnt;
+	int	len;
 
 	i = -1;
 	cnt = 0;
-	if (!str)
+	len = ft_strlen(str);
+	if (len == 0)
 		return (0);
-	while (str[i++])
+	while (i++ < len -1)
 	{
-		if (!(ft_isdigit(str[i]) || str[i] == '.'))
+		if (!ft_isdigit(str[i]) && !(str[i] == '.'))
 			return (0);
 		if (str[i] == '.')
 			cnt++;
@@ -38,11 +40,14 @@ int	is_float(char *str)
 	int	i;
 	int	f;
 
-	i = -1;
+	i = 0;
 	f = 0;
-	while (str[i++])
-		if (*str == '.')
+	while (str[i])
+	{
+		if (str[i] == '.')
 			f = 1;
+		i++;
+	}
 	return(f == 1);
 }
 
@@ -51,7 +56,7 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	return (i);
 }

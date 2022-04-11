@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:44:27 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 21:24:53 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/11 22:17:15 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ void	ft_put_str(char *str)
 {
 	int	i;
 
-	i = -1;
-	while(str[i++])
+	i = 0;
+	while (str[i])
+	{
 		write(1, &str[i], 1);
+		i++;
+	}
 }
 
 void	pixel_put(t_data *data, int x, int y, int color)

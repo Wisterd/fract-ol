@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:39:35 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 21:07:54 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/11 22:09:47 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_complex(char *cr_str, char *ci_str)
 {
 	t_complex	c;
 
-	if (!(is_numb(cr_str) && is_numb(ci_str)))
+	if (!is_numb(cr_str) || !is_numb(ci_str))
 		return (0);
 	if (is_float(cr_str))
 		c.real = ft_atof(cr_str);
