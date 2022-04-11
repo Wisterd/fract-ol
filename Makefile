@@ -3,7 +3,8 @@ CC=gcc
 FLAGS = -Wall -Wextra -Werror
 RM=rm -f
 
-SRC = mandelbrot.c zoom.c utils.c hook.c main.c color.c
+SRC = atof.c mandelbrot.c zoom.c utils.c utils2.c hook.c main.c \
+color.c parsing.c julia.c
 
 OBJ = $(SRC:.c=.o) 
 LIB_LINK = ../mlx/libmlx_Linux.a -lXext -lX11 -lm

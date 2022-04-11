@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/06 17:35:19 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/11 21:28:48 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,40 @@ typedef struct s_zoom_parameters
 {
 	int				maxiter;
 	t_mlx_params	*mlx;
-	t_point			screen;
 	double			*zoom_rate;
 	t_point			mouse;
 }			t_zoom_params;
 
-void			scroll_hook(t_zoom_params *param);
-int				zoom_hook(int button, int x, int y, t_zoom_params *param);
+// atof.c
+double			ft_atof(char *str);
+// color.c
 int				create_color(int r, int g, int b);
-int				key_hooks(int key, t_zoom_params *zoom_params);
-t_zoom_params	*init_zoom(int maxiter, t_mlx_params *mlx, t_point screen, double *zoom_rate);
-void			mandelbrot(int maxiter, t_point screen, t_data *img, t_zoom_params zoom);
-void			back_to_black(t_data *img, t_point screen);
-void			pixel_put(t_data *data, int x, int y, int color);
-int				win_close(t_zoom_params *params);
-int				putkey(int keycode, t_mlx_params *params);
 int				color_scale(int	cnt, int maxiter);
+// hooks.c
+int				key_hooks(int key, t_zoom_params *zoom_params);
+int				win_close(t_zoom_params *params);
+// julia.c
+void    		julia(int maxiter, t_data *img, t_complex c);
+// mandelbrot.c
+void			mandelbrot(int maxiter, t_data *img, t_zoom_params zoom);
+// parsing.c
+int				check_complex(char *cr_str, char *ci_str);
+t_complex		char_to_complex(char *cr_str, char *ci_str);
+// utils.c
+int				ft_strcmp(char *s1, char *s2);
+void			ft_put_str(char *str);
+void			pixel_put(t_data *data, int x, int y, int color);
+int				ft_isdigit(int c);
+int				ft_atoi(char *str);
+int				putkey(int keycode, t_mlx_params *params);
+// utils2.c
+int				is_numb(char *str);
+int				is_float(char *str);
+int				ft_strlen(char *str);
+char			*ft_strdup(char *s1);
+// zoom.c
+t_zoom_params	*init_zoom(int maxiter, t_mlx_params *mlx, double *zoom_rate);
+static int		zoom_in(t_zoom_params *param);
+int				zoom_hook(int button, int x, int y, t_zoom_params *param);
 
 #endif
