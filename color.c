@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:14:35 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 21:10:36 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 14:54:10 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ int	color_scale(int	cnt, int maxiter)
 	double	scale;
 
 	scale = (double)cnt / (double)maxiter;
-	if (scale < 0.1)
+	if (scale < 0.015)
 		return (create_color(224, 30, 25));
-	if (scale < 0.2)
+	if (scale < 0.02)
 		return (create_color(224,100,26));
-	if (scale < 0.3)
+	if (scale < 0.03)
 		return (create_color(224,184,26));
-	if (scale < 0.4)
+	if (scale < 0.05)
 		return (create_color(38,198,26));
-	if (scale < 0.5)
+	if (scale < 0.09)
 		return (create_color(26,198,155));
-	if (scale < 0.6)
+	if (scale < 0.2)
 		return (create_color(26,135,198));
-	if (scale < 0.7)
+	if (scale < 0.3)
 		return (create_color(30,28,133));
-	if (scale < 0.8)
+	if (scale < 0.5)
 		return (create_color(85,28,133));
 	if (scale < 0.9)
 		return (create_color(124,28,133));

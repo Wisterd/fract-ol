@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 22:11:07 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 14:31:23 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 17:03:52 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static int	zoom_in(t_zoom_params *param)
 {
 	*(param->zoom_rate) *= 1/1.1;
 	if (param->id_set == 1)
-		mandelbrot(200, &param->mlx->img, *param);
+		mandelbrot(MAX_ITER, &param->mlx->img, *param);
 	if (param->id_set == 2)
-		julia(500, &param->mlx->img, *param);
+		julia(MAX_ITER, &param->mlx->img, *param);
 	mlx_put_image_to_window(param->mlx->mlx, param->mlx->mlx_win, param->mlx->img.img, 0, 0);
 	return (1);
 }
@@ -39,9 +39,9 @@ static int	zoom_out(t_zoom_params *param)
 {
 	*(param->zoom_rate) *= 1.1;
 	if (param->id_set == 1)
-		mandelbrot(200, &param->mlx->img, *param);
+		mandelbrot(MAX_ITER, &param->mlx->img, *param);
 	if (param->id_set == 2)
-		julia(500, &param->mlx->img, *param);
+		julia(MAX_ITER, &param->mlx->img, *param);
 	mlx_put_image_to_window(param->mlx->mlx, param->mlx->mlx_win, param->mlx->img.img, 0, 0);
 	return(1);
 }

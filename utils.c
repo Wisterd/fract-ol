@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:44:27 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 22:17:15 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 17:15:20 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,3 @@ int	ft_atoi(char *str)
 	return (sign * nb);
 }
 
-/*
-int	putkey(int keycode, t_mlx_params *params)
-{
-	(void) params;
-	printf("%d\n", keycode);
-	return (0);
-}
-*/

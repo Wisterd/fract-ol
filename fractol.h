@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 14:27:07 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 17:17:12 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # define SCROLLUP_KEY 4
 # define SCROLLDOWN_KEY 5
+# define ESCP 65307
+# define LEFT 65361
+# define TOP 65362
+# define RIGHT 65363
+# define BOT 65364
+# define RESO_X 1600
+# define RESO_Y 1200
+# define MAX_ITER 200
 
 # include <stdio.h>
 # include <stdlib.h>

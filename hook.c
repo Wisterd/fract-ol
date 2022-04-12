@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:40:15 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/06 17:32:39 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 17:19:13 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	key_hooks(int key, t_zoom_params *zoom_params)
 {
-	if (key == 65307)
+	if (key == ESCP)
 	{
 		win_close(zoom_params);
 		return (1);
