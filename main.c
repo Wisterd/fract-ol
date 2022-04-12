@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 00:13:29 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 22:20:56 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/11 22:35:42 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	launch_set(int	id_set, t_data *img_ptr, t_zoom_params zoom, char **av)
 		if (check_complex(av[2], av[3]))
 		{
 			c = char_to_complex(av[2], av[3]);
-			julia(200, img_ptr, c);
+			julia(500, img_ptr, c);
 		}
 		else
 			ft_print_instruct();

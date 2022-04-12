@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 20:09:30 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 22:19:02 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 13:32:48 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ int	is_numb(char *str)
 	int	cnt;
 	int	len;
 
-	i = -1;
+	i = 0;
 	cnt = 0;
 	len = ft_strlen(str);
 	if (len == 0)
 		return (0);
-	while (i++ < len -1)
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (i < len -1)
 	{
 		if (!ft_isdigit(str[i]) && !(str[i] == '.'))
 			return (0);
@@ -31,6 +33,7 @@ int	is_numb(char *str)
 			cnt++;
 		if (cnt > 1)
 			return (0);
+		i++;
 	}
 	return (1);
 }
