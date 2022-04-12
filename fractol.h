@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/11 21:28:48 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 14:27:07 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_zoom_parameters
 	t_mlx_params	*mlx;
 	double			*zoom_rate;
 	t_point			mouse;
+	int				id_set;
+	t_complex		c;
 }			t_zoom_params;
 
 // atof.c
@@ -67,7 +69,7 @@ int				color_scale(int	cnt, int maxiter);
 int				key_hooks(int key, t_zoom_params *zoom_params);
 int				win_close(t_zoom_params *params);
 // julia.c
-void    		julia(int maxiter, t_data *img, t_complex c);
+void			julia(int maxiter, t_data *img, t_zoom_params zoom);
 // mandelbrot.c
 void			mandelbrot(int maxiter, t_data *img, t_zoom_params zoom);
 // parsing.c
@@ -86,8 +88,7 @@ int				is_float(char *str);
 int				ft_strlen(char *str);
 char			*ft_strdup(char *s1);
 // zoom.c
-t_zoom_params	*init_zoom(int maxiter, t_mlx_params *mlx, double *zoom_rate);
-static int		zoom_in(t_zoom_params *param);
+t_zoom_params	*init_zoom(t_mlx_params *mlx, double *zoom_rate, int id_set, t_complex c);
 int				zoom_hook(int button, int x, int y, t_zoom_params *param);
 
 #endif
