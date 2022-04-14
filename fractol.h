@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 17:17:12 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 19:56:54 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define TOP 65362
 # define RIGHT 65363
 # define BOT 65364
+# define STEP_MV 0.3
 # define RESO_X 1600
 # define RESO_Y 1200
 # define MAX_ITER 200
@@ -58,14 +59,23 @@ typedef struct	s_mlx_parameters
 	t_data	img;
 }			t_mlx_params;
 
+typedef struct	s_complex_plane
+{
+	double		c_r;
+	double		c_i;
+	double		r_start;
+	double		r_end;
+	double		i_start;
+	double		i_end;
+}				t_cplane;
+
 typedef struct s_zoom_parameters
 {
-	int				maxiter;
 	t_mlx_params	*mlx;
 	double			*zoom_rate;
 	t_point			mouse;
 	int				id_set;
-	t_complex		c;
+	t_cplane		*cplane;
 }			t_zoom_params;
 
 // atof.c
@@ -96,7 +106,7 @@ int				is_float(char *str);
 int				ft_strlen(char *str);
 char			*ft_strdup(char *s1);
 // zoom.c
-t_zoom_params	*init_zoom(t_mlx_params *mlx, double *zoom_rate, int id_set, t_complex c);
+t_zoom_params	*init_zoom(t_mlx_params *mlx, double *zoom_rate, int id_set, t_cplane *cplane);
 int				zoom_hook(int button, int x, int y, t_zoom_params *param);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 22:11:07 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 17:03:52 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 19:33:09 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_zoom_params	*init_zoom(t_mlx_params *mlx, double *zoom_rate, int id_set, t_complex c)
+t_zoom_params	*init_zoom(t_mlx_params *mlx, double *zoom_rate, int id_set, t_cplane *cplane)
 {
 	t_zoom_params	*zoom_params;
 
@@ -20,7 +20,7 @@ t_zoom_params	*init_zoom(t_mlx_params *mlx, double *zoom_rate, int id_set, t_com
 	zoom_params->mlx = mlx;
 	zoom_params->zoom_rate = zoom_rate;
 	zoom_params->id_set = id_set;
-	zoom_params->c = c;
+	zoom_params->cplane = cplane;
 	return (zoom_params);
 }
 

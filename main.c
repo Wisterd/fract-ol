@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 00:13:29 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 17:14:48 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/12 20:00:14 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,17 @@ int	id_av(int ac, char **av)
 	return (0);
 }
 
-t_complex	launch_set(int	id_set, t_data *img_ptr, t_zoom_params zoom, char **av)
+t_cplane	*launch_set(int	id_set, t_data *img_ptr, t_zoom_params zoom, char **av)
 {
+	t_cplane	*cplane;
 	t_complex	c;
-	
-	c.real = 0;
-	c.ima = 0;
+
+	cplane = malloc(sizeof(*cplane));
+	cplane->r_start = -2;
+	cplane->r_end= 2;
+	cplane->i_start = -2;
+	cplane->i_end = 2;
+	zoom.cplane = cplane;
 	if (id_set == 1)
 		mandelbrot(MAX_ITER, img_ptr, zoom);
 	if (id_set == 2)
@@ -65,13 +70,14 @@ t_complex	launch_set(int	id_set, t_data *img_ptr, t_zoom_params zoom, char **av)
 		if (check_complex(av[2], av[3]))
 		{
 			c = char_to_complex(av[2], av[3]);
-			zoom.c = c;
+			cplane->c_r = c.real;
+			cplane->c_i = c.ima;
 			julia(MAX_ITER, img_ptr, zoom);
 		}
 		else
 			ft_print_instruct();
 	}
-	return (c);
+	return (cplane);
 }
 
 int	main(int ac, char **av)
@@ -80,7 +86,7 @@ int	main(int ac, char **av)
 	double			zoom_rate;
 	t_zoom_params	*zoom_params;
 	int				id_set;
-	t_complex		c;
+	t_cplane		*cplane;
 
 	if (ac < 2)
 		ft_print_instruct();
@@ -91,9 +97,9 @@ int	main(int ac, char **av)
 	mlx.img.img = mlx_new_image(mlx.mlx, RESO_X, RESO_Y);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &(mlx.img.bits_per_pixel),
 			&mlx.img.line_length, &mlx.img.endian);
-	c = launch_set(id_set, &mlx.img, main_init(&zoom_rate), av);
+	cplane = launch_set(id_set, &mlx.img, main_init(&zoom_rate), av);
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img.img, 0, 0);
-	zoom_params = init_zoom(&mlx, &zoom_rate, id_set, c);
+	zoom_params = init_zoom(&mlx, &zoom_rate, id_set, cplane);
 	mlx_key_hook(zoom_params->mlx->mlx_win, key_hooks, zoom_params);
 	mlx_hook(zoom_params->mlx->mlx_win, 17, 1L << 3, win_close, zoom_params);
 	mlx_mouse_hook(zoom_params->mlx->mlx_win, zoom_hook, zoom_params);
