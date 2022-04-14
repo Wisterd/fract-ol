@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 19:56:54 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/15 00:23:50 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,28 @@
 # define SCROLLUP_KEY 4
 # define SCROLLDOWN_KEY 5
 # define ESCP 65307
-# define LEFT 65361
-# define TOP 65362
-# define RIGHT 65363
-# define BOT 65364
-# define STEP_MV 0.3
-# define RESO_X 1600
-# define RESO_Y 1200
-# define MAX_ITER 200
+//# define LEFT 65361
+//# define TOP 65362
+//# define RIGHT 65363
+//# define BOT 65364
+# define TOP 126
+# define RIGHT 124
+# define LEFT 123
+# define BOT 125
+# define STEP_MV 0.2
+//# define RESO_X 1600
+//# define RESO_Y 1200
+# define RESO_X 800
+# define RESO_Y 600
+# define MAX_ITER 500
 
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
 # include <pthread.h>
-# include "../mlx/mlx.h"
+//# include "../mlx/mlx.h"
+# include <mlx.h>
 
 typedef struct s_data {
 	void	*img;
@@ -61,8 +68,8 @@ typedef struct	s_mlx_parameters
 
 typedef struct	s_complex_plane
 {
-	double		c_r;
-	double		c_i;
+	double		*c_r;
+	double		*c_i;
 	double		r_start;
 	double		r_end;
 	double		i_start;
@@ -78,6 +85,7 @@ typedef struct s_zoom_parameters
 	t_cplane		*cplane;
 }			t_zoom_params;
 
+int				id_av(int ac, char **av);
 // atof.c
 double			ft_atof(char *str);
 // color.c
@@ -91,6 +99,8 @@ void			julia(int maxiter, t_data *img, t_zoom_params zoom);
 // mandelbrot.c
 void			mandelbrot(int maxiter, t_data *img, t_zoom_params zoom);
 // parsing.c
+void			ft_print_instruct(void);
+void			check_params(int ac, char **av);
 int				check_complex(char *cr_str, char *ci_str);
 t_complex		char_to_complex(char *cr_str, char *ci_str);
 // utils.c

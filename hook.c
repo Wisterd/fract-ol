@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:40:15 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 19:50:02 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/15 00:12:58 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,31 @@ int	key_hooks(int key, t_zoom_params *zoom)
 		win_close(zoom);
 		return (1);
 	}
-	/*
 	if (key == TOP)
-		if (zoom->id_set == 1)
-			mandelbrot()
-	*/
+	{
+		zoom->cplane->i_start -= STEP_MV;
+		zoom->cplane->i_end -= STEP_MV;
+	}
+	if (key == BOT)
+	{
+		zoom->cplane->i_start += STEP_MV;
+		zoom->cplane->i_end += STEP_MV;
+	}
+	if (key == LEFT)
+	{
+		zoom->cplane->r_start -= STEP_MV;
+		zoom->cplane->r_end -= STEP_MV;
+	}
+	if (key == RIGHT)
+	{
+		zoom->cplane->r_start += STEP_MV;
+		zoom->cplane->r_end += STEP_MV;
+	}
+	if (zoom->id_set == 1)
+		mandelbrot(MAX_ITER, &zoom->mlx->img, *zoom);
+	if (zoom->id_set == 2)
+		julia(MAX_ITER, &zoom->mlx->img, *zoom);
+	mlx_put_image_to_window(zoom->mlx->mlx, zoom->mlx->mlx_win, zoom->mlx->img.img, 0, 0);
 	return (0);
 }
 
@@ -32,7 +52,7 @@ int		win_close(t_zoom_params *params)
 	mlx_destroy_image(params->mlx->mlx, params->mlx->img.img);
 	mlx_clear_window(params->mlx->mlx, params->mlx->mlx_win);
 	mlx_destroy_window(params->mlx->mlx, params->mlx->mlx_win);
-	mlx_destroy_display(params->mlx->mlx);
+	//mlx_destroy_display(params->mlx->mlx);
 	free(params->mlx->mlx);
 	free(params->cplane);
 	free(params);

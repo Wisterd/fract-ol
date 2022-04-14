@@ -6,21 +6,11 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 00:13:29 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 20:00:14 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/15 00:22:13 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	ft_print_instruct(void)
-{
-	ft_put_str("The program draws fractals according to 3 sets.\n\
-	To run it, execute either:\n\
-	./fractol mandelbrot\n\
-	./fractol julia c_real c_ima with c in [-2, 2]\n\
-	./fractol ship\n");
-	exit(EXIT_SUCCESS);
-}
 
 static t_zoom_params main_init(double *zoom_rate)
 {
@@ -56,7 +46,7 @@ t_cplane	*launch_set(int	id_set, t_data *img_ptr, t_zoom_params zoom, char **av)
 {
 	t_cplane	*cplane;
 	t_complex	c;
-
+	
 	cplane = malloc(sizeof(*cplane));
 	cplane->r_start = -2;
 	cplane->r_end= 2;
@@ -67,15 +57,10 @@ t_cplane	*launch_set(int	id_set, t_data *img_ptr, t_zoom_params zoom, char **av)
 		mandelbrot(MAX_ITER, img_ptr, zoom);
 	if (id_set == 2)
 	{
-		if (check_complex(av[2], av[3]))
-		{
-			c = char_to_complex(av[2], av[3]);
-			cplane->c_r = c.real;
-			cplane->c_i = c.ima;
-			julia(MAX_ITER, img_ptr, zoom);
-		}
-		else
-			ft_print_instruct();
+		c = char_to_complex(av[2], av[3]);
+		cplane->c_r = &c.real;
+		cplane->c_i = & c.ima;
+		julia(MAX_ITER, img_ptr, zoom);
 	}
 	return (cplane);
 }
@@ -88,8 +73,7 @@ int	main(int ac, char **av)
 	int				id_set;
 	t_cplane		*cplane;
 
-	if (ac < 2)
-		ft_print_instruct();
+	check_params(ac, av);
 	id_set = id_av(ac, av);
 	zoom_rate = 1;
 	mlx.mlx = mlx_init();
