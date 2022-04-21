@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 23:44:27 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 17:15:20 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/21 20:39:50 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strcmp(char *s1, char *s2)
 {
 	size_t	i;
-	
+
 	if (!s1 || !s2)
 		return (-1);
 	i = 0;
@@ -44,7 +44,7 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 int	ft_isdigit(int c)
@@ -79,4 +79,3 @@ int	ft_atoi(char *str)
 	}
 	return (sign * nb);
 }
-

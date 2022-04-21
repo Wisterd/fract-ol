@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/15 00:23:50 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/21 23:47:05 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,24 @@
 # define SCROLLUP_KEY 4
 # define SCROLLDOWN_KEY 5
 # define ESCP 65307
-//# define LEFT 65361
-//# define TOP 65362
-//# define RIGHT 65363
-//# define BOT 65364
-# define TOP 126
-# define RIGHT 124
-# define LEFT 123
-# define BOT 125
+# define LEFT 65361
+# define TOP 65362
+# define RIGHT 65363
+# define BOT 65364
 # define STEP_MV 0.2
-//# define RESO_X 1600
-//# define RESO_Y 1200
-# define RESO_X 800
-# define RESO_Y 600
+# define RESO_X 1600
+# define RESO_Y 1200
 # define MAX_ITER 500
-
+# define N1 18
+# define N2 19
+# define N3 20
+# define N4 21
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
 # include <pthread.h>
-//# include "../mlx/mlx.h"
-# include <mlx.h>
+# include "../mlx/mlx.h"
 
 typedef struct s_data {
 	void	*img;
@@ -59,14 +55,14 @@ typedef struct s_screen_point
 	double	y;
 }			t_point;
 
-typedef struct	s_mlx_parameters
+typedef struct s_mlx_parameters
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
 }			t_mlx_params;
 
-typedef struct	s_complex_plane
+typedef struct s_complex_plane
 {
 	double		*c_r;
 	double		*c_i;
@@ -80,43 +76,37 @@ typedef struct s_zoom_parameters
 {
 	t_mlx_params	*mlx;
 	double			*zoom_rate;
-	t_point			mouse;
 	int				id_set;
 	t_cplane		*cplane;
+	int				id_col;
 }			t_zoom_params;
 
 int				id_av(int ac, char **av);
-// atof.c
 double			ft_atof(char *str);
-// color.c
 int				create_color(int r, int g, int b);
-int				color_scale(int	cnt, int maxiter);
-// hooks.c
+int				color_scale(int cnt, int maxiter, int id_col);
 int				key_hooks(int key, t_zoom_params *zoom_params);
 int				win_close(t_zoom_params *params);
-// julia.c
 void			julia(int maxiter, t_data *img, t_zoom_params zoom);
-// mandelbrot.c
 void			mandelbrot(int maxiter, t_data *img, t_zoom_params zoom);
-// parsing.c
+void			ship(int maxiter, t_data *img, t_zoom_params zoom);
 void			ft_print_instruct(void);
 void			check_params(int ac, char **av);
 int				check_complex(char *cr_str, char *ci_str);
 t_complex		char_to_complex(char *cr_str, char *ci_str);
-// utils.c
 int				ft_strcmp(char *s1, char *s2);
 void			ft_put_str(char *str);
 void			pixel_put(t_data *data, int x, int y, int color);
 int				ft_isdigit(int c);
 int				ft_atoi(char *str);
 int				putkey(int keycode, t_mlx_params *params);
-// utils2.c
 int				is_numb(char *str);
 int				is_float(char *str);
 int				ft_strlen(char *str);
 char			*ft_strdup(char *s1);
-// zoom.c
-t_zoom_params	*init_zoom(t_mlx_params *mlx, double *zoom_rate, int id_set, t_cplane *cplane);
+double			ft_abs(double d);
+t_zoom_params	*init_zoom(t_mlx_params *mlx, double *zoom_rate, \
+	int id_set, t_cplane *cplane);
 int				zoom_hook(int button, int x, int y, t_zoom_params *param);
 
 #endif

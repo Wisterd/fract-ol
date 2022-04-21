@@ -6,55 +6,30 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:14:35 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 14:54:10 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/21 23:42:15 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	create_color(int r, int g, int b)
+int	color_scale(int cnt, int maxiter, int col_ind)
 {
-	return (0 << 24 | r << 16 | g << 8 | b);
+	static int	tab1[] = {0xeeeee4, 0x063970, 0x1e81b0, 0x76b5c5, 0xabdbe3};
+	static int	tab2[] = {0xaf56e3, 0xcf2929, 0xe89210, 0xe8c810, 0xed79e2};
+	static int	tab3[] = {0xCDA2AB, 0x048A81, 0x06D6A0, 0x54C6EB, 0x8A89C0};
+	static int	tab4[] = {0xFF8600, 0x27187E, 0x758BFD, 0xAEB8FE, 0xF1F2F6};
+	int			*tab;
+
+	tab = NULL;
+	if (col_ind == 1)
+		tab = tab1;
+	if (col_ind == 2)
+		tab = tab2;
+	if (col_ind == 3)
+		tab = tab3;
+	if (col_ind == 4)
+		tab = tab4;
+	if (cnt == maxiter)
+		return (0x000);
+	return (tab[cnt % 5]);
 }
-
-int	color_scale(int	cnt, int maxiter)
-{
-	double	scale;
-
-	scale = (double)cnt / (double)maxiter;
-	if (scale < 0.015)
-		return (create_color(224, 30, 25));
-	if (scale < 0.02)
-		return (create_color(224,100,26));
-	if (scale < 0.03)
-		return (create_color(224,184,26));
-	if (scale < 0.05)
-		return (create_color(38,198,26));
-	if (scale < 0.09)
-		return (create_color(26,198,155));
-	if (scale < 0.2)
-		return (create_color(26,135,198));
-	if (scale < 0.3)
-		return (create_color(30,28,133));
-	if (scale < 0.5)
-		return (create_color(85,28,133));
-	if (scale < 0.9)
-		return (create_color(124,28,133));
-	if (scale < 1)
-		return (create_color(198,38,155));
-	return (create_color(0,0,0));
-}
-
-/*
-int	color_scale(int cnt, int maxiter)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = 255 - cnt * 255 / maxiter;
-	g = 255 - cnt * 255 / maxiter;
-	b = 255 - cnt * 255 / maxiter;
-	return (0 << 24 | r << 16 | g << 8 | b);
-}
-*/

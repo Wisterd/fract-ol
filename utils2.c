@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 20:09:30 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/12 13:32:48 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/21 23:43:30 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	is_float(char *str)
 			f = 1;
 		i++;
 	}
-	return(f == 1);
+	return (f == 1);
 }
 
 int	ft_strlen(char *str)
@@ -84,4 +84,11 @@ char	*ft_strdup(char *s1)
 		}
 	}
 	return (cp);
+}
+
+double	ft_abs(double d)
+{
+	if (d < 0)
+		d *= -1;
+	return (d);
 }

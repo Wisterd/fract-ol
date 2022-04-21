@@ -6,19 +6,17 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 00:13:29 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/15 00:22:13 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/21 23:11:34 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static t_zoom_params main_init(double *zoom_rate)
+static t_zoom_params	main_init(double *zoom_rate)
 {
-	t_zoom_params 	zoom_init;
+	t_zoom_params	zoom_init;
 
 	zoom_init.zoom_rate = zoom_rate;
-	zoom_init.mouse.x = 0;
-	zoom_init.mouse.y = 0;
 	return (zoom_init);
 }
 
@@ -33,7 +31,7 @@ int	id_av(int ac, char **av)
 		else
 		{
 			ft_print_instruct();
-			return (0);	
+			return (0);
 		}
 	}
 	if (ft_strcmp(av[1], "ship") == 0)
@@ -42,26 +40,30 @@ int	id_av(int ac, char **av)
 	return (0);
 }
 
-t_cplane	*launch_set(int	id_set, t_data *img_ptr, t_zoom_params zoom, char **av)
+t_cplane	*launch_set(int id_set, t_data *img_ptr, \
+	t_zoom_params zoom, char **av)
 {
 	t_cplane	*cplane;
 	t_complex	c;
-	
+
 	cplane = malloc(sizeof(*cplane));
 	cplane->r_start = -2;
-	cplane->r_end= 2;
+	cplane->r_end = 2;
 	cplane->i_start = -2;
 	cplane->i_end = 2;
 	zoom.cplane = cplane;
+	zoom.id_col = 1;
 	if (id_set == 1)
 		mandelbrot(MAX_ITER, img_ptr, zoom);
 	if (id_set == 2)
 	{
 		c = char_to_complex(av[2], av[3]);
 		cplane->c_r = &c.real;
-		cplane->c_i = & c.ima;
+		cplane->c_i = &c.ima;
 		julia(MAX_ITER, img_ptr, zoom);
 	}
+	if (id_set == 3)
+		ship(MAX_ITER, img_ptr, zoom);
 	return (cplane);
 }
 
