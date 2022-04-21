@@ -12,8 +12,7 @@ LIB_LINK = ../mlx/libmlx_Linux.a -lXext -lX11 -lm
 	$(CC) -Imlx -c -o $@ $< $(FLAGS)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(FLAGS)
-#$(CC) $(OBJ) $(LIB_LINK) -o $(NAME) $(FLAGS)
+	$(CC) $(OBJ) $(LIB_LINK) -o $(NAME) $(FLAGS)
 
 all: $(NAME)
 
