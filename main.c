@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 00:13:29 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/21 23:11:34 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/25 17:03:45 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ t_cplane	*launch_set(int id_set, t_data *img_ptr, \
 	if (id_set == 2)
 	{
 		c = char_to_complex(av[2], av[3]);
-		cplane->c_r = &c.real;
-		cplane->c_i = &c.ima;
+		cplane->c_r = c.real;
+		cplane->c_i = c.ima;
 		julia(MAX_ITER, img_ptr, zoom);
 	}
 	if (id_set == 3)

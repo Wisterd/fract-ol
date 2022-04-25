@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:46:18 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/21 23:47:05 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/25 17:02:44 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 # define RESO_X 1600
 # define RESO_Y 1200
 # define MAX_ITER 500
-# define N1 18
-# define N2 19
-# define N3 20
-# define N4 21
+# define N1 49
+# define N2 50
+# define N3 51
+# define N4 52
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -64,8 +64,8 @@ typedef struct s_mlx_parameters
 
 typedef struct s_complex_plane
 {
-	double		*c_r;
-	double		*c_i;
+	double		c_r;
+	double		c_i;
 	double		r_start;
 	double		r_end;
 	double		i_start;

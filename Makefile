@@ -1,6 +1,6 @@
 NAME=fractol
 CC=gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -O3
 RM=rm -f
 DEPS = fractol.h
 OBJ = atof.o algos.o zoom.o utils.o utils2.o hook.o main.o \

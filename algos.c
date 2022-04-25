@@ -6,7 +6,7 @@
 /*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:44:55 by mvue              #+#    #+#             */
-/*   Updated: 2022/04/21 23:41:46 by mvue             ###   ########.fr       */
+/*   Updated: 2022/04/25 17:09:15 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	julia(int maxiter, t_data *img, t_zoom_params zoom)
 			cnt = -1;
 			while ((++cnt < maxiter) && (z.real * z.real + z.ima * z.ima < 4))
 			{
-				temp = z.real * z.real - z.ima * z.ima + *zoom.cplane->c_r;
-				z.ima = 2 * z.real * z.ima + *zoom.cplane->c_i;
+				temp = z.real * z.real - z.ima * z.ima + zoom.cplane->c_r;
+				z.ima = 2 * z.real * z.ima + zoom.cplane->c_i;
 				z.real = temp;
 			}
 			pixel_put(img, p.x, p.y, color_scale(cnt, maxiter, zoom.id_col));
